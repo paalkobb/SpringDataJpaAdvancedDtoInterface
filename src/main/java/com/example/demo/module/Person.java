@@ -2,6 +2,8 @@ package com.example.demo.module;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -9,32 +11,37 @@ import java.util.Collection;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     String firstName;
     String lastName;
     Integer age;
 
-    Address address;
-
-    Collection<Person> friends;
+    @ManyToMany
+    @JoinTable(name="personAddress",
+        joinColumns = {@JoinColumn(name = "fk_person")},
+        inverseJoinColumns = {@JoinColumn(name = "fk_address")}
+    )
+    Set<Address> address = new HashSet<Address>();
 
     public Person(){
-
     }
 
     public Person(String firstName, String lastName){
-        this(firstName, lastName, null, null, null);
+        this(firstName, lastName, null);
 
     }
 
-    public Person(String firstName, String lastName, Integer age, Address address, Collection<Person> friends){
+    public Person(String firstName, String lastName, Integer age){
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.address = address;
-        this.friends = friends;
+
+    }
+
+    public Long getId(){
+        return id;
     }
 
     public String getFirstName() {
@@ -61,31 +68,27 @@ public class Person {
         this.age = age;
     }
 
-    public Address getAddress() {
+    public Set<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Set<Address> address) {
         this.address = address;
     }
 
-    public Collection<Person> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(Collection<Person> friends) {
-        this.friends = friends;
+    public void addAddress(Address address){
+        this.address.add(address);
     }
 
 
     @Override
     public String toString() {
         return "Person{" +
-                "firstName='" + firstName + '\'' +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
                 ", age=" + age +
-                ", address=" + address +
-                ", friends=" + friends +
                 '}';
     }
 
