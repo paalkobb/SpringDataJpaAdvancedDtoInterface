@@ -15,4 +15,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @Query(value = "select * FROM PERSON p", nativeQuery = true)
     List<Person> getIds();
+
+    @Query("SELECT p.id as id, a as address FROM Person p left join p.address as a")
+    List<PersonAddressDtoInterface> getIdAndAddress();
 }

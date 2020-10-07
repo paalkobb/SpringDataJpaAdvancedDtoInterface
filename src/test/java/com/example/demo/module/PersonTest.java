@@ -62,4 +62,16 @@ class PersonTest {
             log.info(pp.getAddress());
         }
     }
+
+
+    @Test
+    void getIdAndAddress(){
+        this.init();
+        List<PersonAddressDtoInterface> p = pRepo.getIdAndAddress();
+        for (PersonAddressDtoInterface pp : p){
+            log.info(pp.getId());
+            log.info(pp.getAddress());
+            log.info(pp.getAddress().getAddress());
+        }
+    }
 }

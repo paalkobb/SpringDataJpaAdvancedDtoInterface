@@ -1,7 +1,6 @@
 package com.example.demo.module;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class Person {
         joinColumns = {@JoinColumn(name = "fk_person")},
         inverseJoinColumns = {@JoinColumn(name = "fk_address")}
     )
-    Set<Address> address = new HashSet<Address>();
+    Set<Address> address = new HashSet<>();
 
     public Person(){
     }

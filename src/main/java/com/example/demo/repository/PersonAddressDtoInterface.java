@@ -6,6 +6,14 @@ public interface PersonAddressDtoInterface {
 
     Long getId();
 
-    Address getAddress();
+    String getFirstName();
+
+    AddressView getAddress();
+
+    interface AddressView{
+
+        String getAddress();
+
+    }
 
 }
