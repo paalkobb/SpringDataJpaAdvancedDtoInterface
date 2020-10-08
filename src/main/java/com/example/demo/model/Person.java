@@ -1,4 +1,4 @@
-package com.example.demo.module;
+package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,19 +10,19 @@ import java.util.Set;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    String firstName;
-    String lastName;
-    Integer age;
+    private String firstName;
+    private String lastName;
+    private Integer age;
 
     @ManyToMany
-    @JoinTable(name="personAddress",
+    @JoinTable(name="PersonAddress",
         joinColumns = {@JoinColumn(name = "fk_person")},
         inverseJoinColumns = {@JoinColumn(name = "fk_address")}
     )
-    Set<Address> address = new HashSet<>();
+    private Set<Address> address = new HashSet<>();
 
     public Person(){
     }
