@@ -98,24 +98,6 @@ class PersonServiceTest {
     }
 
 
-    void logPersonViewResult(List<PersonView> p){
-//   Log the result
-        for (PersonView pp : p){
-            log.info(
-                    "[id: '" + pp.getId() + "'\'' " +
-                        "firstName: '" + pp.getFirstName() + "'\'' " +
-                        "lastName: '" + pp.getLastName() + "'\'' " +
-                        "age: '" + pp.getAge() + "'\'' " +
-                        "addressId: '" + pp.getAddressId() + "'\'' " +
-                        "streetName: '" + pp.getStreetName() + "'\'' " +
-                        "addressNumber: '" + pp.getAddressNumber() + "'\'' " +
-                        "addressLetter: '" + pp.getAddressLetter() + "'\'' " +
-                        "addressZipCode: '" + pp.getAddressZipCode() + "'\'' " +
-                        "addressCity: '" + pp.getAddressCity() + "'\'' "
-            );
-        }
-    }
-
 /*******************************/
 /** Different findAll queries */
 /*******************************/
@@ -191,7 +173,20 @@ class PersonServiceTest {
         Assert.assertTrue(p.size() > 0);
 //      Assert that a List is returned
         Assert.assertEquals(ArrayList.class, p.getClass());
-        this.logPersonViewResult(p);
+        for (PersonView pp : p){
+            log.info(
+                    "[id: '" + pp.getId() + "'\'' " +
+                            "firstName: '" + pp.getFirstName() + "'\'' " +
+                            "lastName: '" + pp.getLastName() + "'\'' " +
+                            "age: '" + pp.getAge() + "'\'' " +
+                            "addressId: '" + pp.getAddress().getId() + "'\'' " +
+                            "streetName: '" + pp.getAddress().getStreetName() + "'\'' " +
+                            "addressNumber: '" + pp.getAddress().getNumber() + "'\'' " +
+                            "addressLetter: '" + pp.getAddress().getLetter() + "'\'' " +
+                            "addressZipCode: '" + pp.getAddress().getZipCode() + "'\'' " +
+                            "addressCity: '" + pp.getAddress().getCity() + "'\'' "
+            );
+        }
     }
 
 /**************************************/
@@ -266,8 +261,8 @@ class PersonServiceTest {
     @Test
     @Rollback(false)
     @Order(8)
-    void findByFirstNameDtoInterface() {
-        log.info("Testing method findByFirstNameDtoInterface()...");
+    void findByFirstNameDto() {
+        log.info("Testing method findByFirstNameDto()...");
 //      Call the repository method
         List<PersonView> p = personRepository.findByFirstNameDto("Paal");
 //      Assert that the method does not return null value
@@ -277,8 +272,50 @@ class PersonServiceTest {
         Assert.assertTrue(p.size() > 0);
 //      Assert that a List is returned
         Assert.assertEquals(ArrayList.class, p.getClass());
-        this.logPersonViewResult(p);
+        for (PersonView pp : p){
+            log.info(
+                    "[id: '" + pp.getId() + "'\'' " +
+                            "firstName: '" + pp.getFirstName() + "'\'' " +
+                            "lastName: '" + pp.getLastName() + "'\'' " +
+                            "age: '" + pp.getAge() + "'\'' " +
+                            "addressId: '" + pp.getAddress().getId() + "'\'' " +
+                            "streetName: '" + pp.getAddress().getStreetName() + "'\'' " +
+                            "addressNumber: '" + pp.getAddress().getNumber() + "'\'' " +
+                            "addressLetter: '" + pp.getAddress().getLetter() + "'\'' " +
+                            "addressZipCode: '" + pp.getAddress().getZipCode() + "'\'' " +
+                            "addressCity: '" + pp.getAddress().getCity() + "'\'' "
+            );
+        }
+
     }
 
-
+    @Test
+    @Order(9)
+    void findByFirstNameDtoWithInhabitants() {
+        log.info("Testing method findByFirstNameDtoWithInhabitants()...");
+//      Call the repository method
+        List<PersonView> p = personRepository.findByFirstNameDtoWithInhabitants("Paal");
+//      Assert that the method does not return null value
+//      when there is data in the database
+        Assert.assertNotNull(p);
+//      Assert that the size is bigger than 0
+        Assert.assertTrue(p.size() > 0);
+//      Assert that a List is returned
+        Assert.assertEquals(ArrayList.class, p.getClass());
+        for (PersonView pp : p){
+            log.info(
+                    "[id: '" + pp.getId() + "'\'' " +
+                            "firstName: '" + pp.getFirstName() + "'\'' " +
+                            "lastName: '" + pp.getLastName() + "'\'' " +
+                            "age: '" + pp.getAge() + "'\'' " +
+                            "addressId: '" + pp.getAddress().getId() + "'\'' " +
+                            "streetName: '" + pp.getAddress().getStreetName() + "'\'' " +
+                            "addressNumber: '" + pp.getAddress().getNumber() + "'\'' " +
+                            "addressLetter: '" + pp.getAddress().getLetter() + "'\'' " +
+                            "addressZipCode: '" + pp.getAddress().getZipCode() + "'\'' " +
+                            "addressCity: '" + pp.getAddress().getCity() + "'\'' " +
+                            "addressInhabitans: '" + pp.getInhabitant().getId() + "'\''"
+            );
+        }
+    }
 }

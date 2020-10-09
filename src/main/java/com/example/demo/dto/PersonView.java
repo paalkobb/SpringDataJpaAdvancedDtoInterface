@@ -1,5 +1,9 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Person;
+
+import java.util.Set;
+
 public interface PersonView {
 
     Long getId();
@@ -10,25 +14,15 @@ public interface PersonView {
 
     Integer getAge();
 
-    Long getAddressId();
-
-    String getStreetName();
-
-    Integer getAddressNumber();
-
-    String getAddressLetter();
-
-    Integer getAddressZipCode();
-
-    String getAddressCity();
-
     AddressViewNested getAddress();
+
+    InhabitantViewNested getInhabitant();
 
     interface AddressViewNested {
 
         Long getId();
 
-        String getAddress();
+        String getStreetName();
 
         Integer getNumber();
 
@@ -38,7 +32,11 @@ public interface PersonView {
 
         String getCity();
 
-        // Get the inhabitant?
+    }
+
+    interface InhabitantViewNested{
+
+        Long getId();
 
     }
 

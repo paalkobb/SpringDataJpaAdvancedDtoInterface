@@ -13,7 +13,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String address;
+    String streetName;
     Integer number;
     String letter;
     Integer zipCode;
@@ -24,12 +24,12 @@ public class Address {
 
     public Address(){}
 
-    public Address(String address, Integer zipCode, String city){
-        this(address, null, null, zipCode,city);
+    public Address(String streetName, Integer zipCode, String city){
+        this(streetName, null, null, zipCode,city);
     }
 
-    public Address(String address, Integer number, String letter, Integer zipCode, String city){
-        this.address = address;
+    public Address(String streetName, Integer number, String letter, Integer zipCode, String city){
+        this.streetName = streetName;
         this.number = number;
         this.letter = letter;
         this.zipCode = zipCode;
@@ -44,12 +44,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
     public Integer getNumber() {
@@ -107,7 +107,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", address='" + address + '\'' +
+                ", address='" + streetName + '\'' +
                 ", number=" + number +
                 ", letter='" + letter + '\'' +
                 ", zipCode=" + zipCode +

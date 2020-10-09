@@ -40,8 +40,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 //  Joins the @ManyToMany associations, instead og lazy loading
 //  Will create a proxy at runtime
     @Query(value = "SELECT p.id as id, p.firstName as firstName, p.lastName as lastName, p.age as age, " +
-            "address.id as addressId, address.address as streetName, address.letter as addressLetter, " +
-            "address.number as addressNumber, address.zipCode as addressZipCode, address.city as addressCity " +
+            "address.id as addressId, address as address " +
             "FROM Person p " +
             "join p.address address")
     List<PersonView> findAllCustomDtoInterface();
@@ -76,11 +75,30 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 //  Joins the @ManyToMany associations, instead og lazy loading
 //  Will create a proxy at runtime
     @Query(value = "SELECT p.id as id, p.firstName as firstName, p.lastName as lastName, p.age as age, " +
-            "address.id as addressId, address.address as streetName, address.letter as addressLetter, " +
-            "address.number as addressNumber, address.zipCode as addressZipCode, address.city as addressCity " +
+            "address.id as addressId, address as address " +
             "FROM Person p " +
             "join p.address address " +
             "WHERE p.firstName = :firstName")
     List<PersonView> findByFirstNameDto(@Param("firstName") String firstName);
+
+
+    @Query(value = "SELECT p.id as id, p.firstName as firstName, p.lastName as lastName, p.age as age, " +
+            "address.id as addressId, address as address, " +
+            "inhabitant.id as inhabitantId, inhabitant as inhabitant " +
+            "FROM Person p " +
+            "join p.address address " +
+            "join address.inhabitant inhabitant " +
+            "WHERE p.firstName = :firstName")
+    List<PersonView> findByFirstNameDtoWithInhabitants(@Param("firstName") String firstName);
+
+
+
+
+
+
+
+
+
+
 
 }

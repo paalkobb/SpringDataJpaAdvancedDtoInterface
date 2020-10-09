@@ -49,10 +49,13 @@ public class PersonService {
         return p;
     }
 
-    public List<PersonView> findByFirstNameDtoInterface(){
+    public List<PersonView> findByFirstNameDto(){
         List<PersonView> p = personRepository.findByFirstNameDto("firstName");
         return p;
     }
 
-
+    public List<PersonView> findByFirstNameDtoWithInhabitants(){
+        List<PersonView> p = personRepository.findByFirstNameDtoWithInhabitants("firstName");
+        return p;
+    }
 }
